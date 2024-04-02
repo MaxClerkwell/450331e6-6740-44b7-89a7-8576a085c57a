@@ -1,31 +1,35 @@
 \documentclass{dcbl/challenge}
 
-\setdoctitle{Der Titel meines Dokuments}
+\setdoctitle{First Steps with Git}
 \setdocauthor{Stephan Bökelmann}
 \setdocemail{sboekelmann@ep1.rub.de}
 \setdocinstitute{AG Physik der Hadronen und Kerne}
 
 
 \begin{document}
+When it comes to programming, keeping track of our progress is an important part of our work. Especially undoing work and later reapplying it (e.g. for finding a bug, recreating an old release, ....) is a common task developers perform. Hence, we need options to mark certain progress points - just like saving game progress in a computer game.
 
-When it comes to programming, we don't want our progress to be lost along the way. 
-Even more, might want to get back to a certain point in time, before we deleted this wonderful function we once wrote, but after we applied several other changes.
-In computer-games we usually have something like quicksaves. 
-This is exactely what we will do in this worksheet.
-In order for us, to set reproducable waypoints in our progress, we will use Git.
-Git was originally developed by Linus Torvalds, to keep track of the progress of the Linux-Kernel.
-Getting started with git can be confusing at first, but once mastered it can be a powerful tool for tracking changes and working with multiple people on the same project.
+In software development, this concept is called \textbf{version control}. There are multiple programs that implement version control, however git is the most widely used one. In this worksheet, we will explore how to use git for saving progress and making it available to others.
+Git was originally developed by Linus Torvalds to keep track of the progress of the Linux-Kernel. It allows to work simultaneously on the same files and offers a powerful comparison and merge algorithm to incorporate the work of multiple developers into one software version.
+Getting started with git can be confusing at first, but once mastered it is a powerful tool for tracking changes and working with multiple people on the same project.
+Remember, each Git command has a \texttt{--help}-flag. Appending it to any command opens a helpful page explaining to you what the command does and what parameters you can append.
+
+Traditionally, every clone of a repository —a software project managed with Git— was considered equal. This meant that any copy had the same status and could act as the central codebase. However, the current practice typically revolves around a singular source repository from which everyone clones. These central repositories are hosted on servers, with platforms like GitHub and GitLab being prime examples. Nevertheless, using such a service isn't mandatory for working with Git. After all, Git was around for three years before GitHub's launch in 2008.
+
 
 \section*{Exercises}
 \begin{aufgabe}
-    First of all, install Git using your Linux distribution's package manager (e.g., \texttt{apt-get install git} on Debian/Ubuntu or \texttt{yum install git} on Fedora).
-    Configure Git with your name and email using \texttt{git config --global user.name} and \texttt{git config --global user.email}.
-    Navigate into your home directory and create a new directory for our first project.
-    The tool Git relies on a hidden folder, in the directory it should be tracking. 
-    We can create this folder by running \texttt{git init}.
+    First, install Git using your Linux distribution's package manager (e.g., \texttt{apt-get install git} on Debian/Ubuntu or \texttt{yum install git} on Fedora).
+    
+    Next, configure Git with your name and email using \texttt{git config --global user.name "Your Name"} and \texttt{git config --global user.email "Your Email"}.
+
+    Now, create a new folder in your home directory and navigate into this folder.
+    By running \texttt{git init} we mark this folder as versioned by git. This creates a hidden folder \texttt{.git} in which git stores all information relevant for the repository. 
     \texttt{git init} creates a folder named \texttt{.git} in your project directory.
     All changes should be tracked in this folder.
-    We can now use \texttt{git status} to check whether the folder is in a clean state or not.
+    Now, running \texttt{git status} gives us all information about the state of the folder, for example, which changes are made.
+    
+    Hint: \texttt{git status} can be run at any time - even before initializing a repo - and gives you a lot of insight into changes (run before and after any command if you are not familiar with git) 
 \end{aufgabe}
 
 \begin{aufgabe}        
@@ -33,35 +37,51 @@ Getting started with git can be confusing at first, but once mastered it can be 
     Add some content to the file, for example, a project title or description.
     Stage the file using \texttt{git add README.md}.
     Commit the changes with a message using \texttt{git commit -m "Initial commit"}.
+    Hint: Run \texttt{git status} before and after each of these commands.
 \end{aufgabe}
 
 \begin{aufgabe}
-    Modify the \texttt{README.md} file by adding more information or making some changes.
-    Stage and commit these changes.
-    Use \texttt{git log} to view the commit history and note the commit hash of your first commit.
-    Check out the first commit using \texttt{git checkout} followed by the first four characters of the commit hash.
-    Explore the state of the repository at that point, then return to the latest state using \texttt{git checkout main} (or \texttt{master} if your default branch is named master).
+    Modify \texttt{README.md} in some form, then stage and commit these changes like before.
+    
+    Use \texttt{git log} to view your commit history and note the commit hash of your first commit. The hash identifies a commit and will not change. 
+    
+    Try this out by selecting the first commit using \texttt{git checkout} followed by the first four characters of the commit hash.
+    
+    Explore the state of the repository at that (previous) point, then return to the latest state using \texttt{git checkout main} (or \texttt{master} if your default branch is named master).
+    
 \end{aufgabe}
 \begin{aufgabe}
-    Create a new branch named \texttt{feature} using \texttt{git branch feature}.
+    A branch is a variation of your current state (e.g. you develop a new feature or want to test sth out that should not be available on the main branch). 
+    Check what branches your repository currently contains by running \texttt{git branch --list}.
+    
+    Then, create a new branch named \texttt{feature} using \texttt{git branch feature}.
+    Now list your branches again using \texttt{git branch --list}.
     Switch to the new branch with \texttt{git checkout feature}.
+    
     Make changes to the \texttt{README.md} file or create a new file in the branch.
     Stage and commit the changes on this branch.
     Switch back to the main branch using \texttt{git checkout main}.
     Merge the changes from \texttt{feature} into \texttt{main} using \texttt{git merge feature}.
+
+    You can evaluate what happened by using \texttt{git log} again. Try adapting the command by executing \texttt{git log --all --decorate --oneline --graph}.
+    
     
 \end{aufgabe}
 \begin{aufgabe}
     Make changes to any file in your repository, but do not stage or commit these changes.
     Use \texttt{git stash} to temporarily store the uncommitted changes.
+    
     Check the status of your repository with \texttt{git status} to ensure it's clean.
+    Also, look at your stashes by running \texttt{git stash list}.
+    
     Apply the stashed changes back to your working directory with \texttt{git stash pop} and continue your work.
-
 \end{aufgabe}
 
 \section*{Annotations}
 \begin{enumerate}
     \item Link zu einem YouTube-Video: \url{https://www.youtube.com}
+    \item Reference to git: \url{https://git-scm.com/docs}
+    \item Rub GitLab Server: \url{https://gitlab.ruhr-uni-bochum.de/} Use your Rub User-ID and Password to log in
 \end{enumerate}
 
 \end{document}
