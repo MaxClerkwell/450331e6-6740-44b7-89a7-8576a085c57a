@@ -8,18 +8,58 @@
 
 \begin{document}
 
-Jedes Challenge-Blatt beginnt mit einer kurzen Einleitung, die einen Kontext für den jeweiligen Zettel setzt. 
+When it comes to programming, we don't want our progress to be lost along the way. 
+Even more, might want to get back to a certain point in time, before we deleted this wonderful function we once wrote, but after we applied several other changes.
+In computer-games we usually have something like quicksaves. 
+This is exactely what we will do in this worksheet.
+In order for us, to set reproducable waypoints in our progress, we will use Git.
+Git was originally developed by Linus Torvalds, to keep track of the progress of the Linux-Kernel.
+Getting started with git can be confusing at first, but once mastered it can be a powerful tool for tracking changes and working with multiple people on the same project.
 
-\section*{Aufgaben}
+\section*{Exercises}
 \begin{aufgabe}
-    Löse die Gleichung $x^2 - 5x + 6 = 0$.
+    First of all, install Git using your Linux distribution's package manager (e.g., \texttt{apt-get install git} on Debian/Ubuntu or \texttt{yum install git} on Fedora).
+    Configure Git with your name and email using \texttt{git config --global user.name} and \texttt{git config --global user.email}.
+    Navigate into your home directory and create a new directory for our first project.
+    The tool Git relies on a hidden folder, in the directory it should be tracking. 
+    We can create this folder by running \texttt{git init}.
+    \texttt{git init} creates a folder named \texttt{.git} in your project directory.
+    All changes should be tracked in this folder.
+    We can now use \texttt{git status} to check whether the folder is in a clean state or not.
 \end{aufgabe}
 
-\begin{aufgabe}[Für Fortgeschrittene]
-    Beweise den Satz des Pythagoras.
+\begin{aufgabe}        
+    Create a new file named \texttt{README.md} in your repository directory.
+    Add some content to the file, for example, a project title or description.
+    Stage the file using \texttt{git add README.md}.
+    Commit the changes with a message using \texttt{git commit -m "Initial commit"}.
 \end{aufgabe}
 
-\section*{Anmerkungen}
+\begin{aufgabe}
+    Modify the \texttt{README.md} file by adding more information or making some changes.
+    Stage and commit these changes.
+    Use \texttt{git log} to view the commit history and note the commit hash of your first commit.
+    Check out the first commit using \texttt{git checkout} followed by the first four characters of the commit hash.
+    Explore the state of the repository at that point, then return to the latest state using \texttt{git checkout main} (or \texttt{master} if your default branch is named master).
+\end{aufgabe}
+\begin{aufgabe}
+    Create a new branch named \texttt{feature} using \texttt{git branch feature}.
+    Switch to the new branch with \texttt{git checkout feature}.
+    Make changes to the \texttt{README.md} file or create a new file in the branch.
+    Stage and commit the changes on this branch.
+    Switch back to the main branch using \texttt{git checkout main}.
+    Merge the changes from \texttt{feature} into \texttt{main} using \texttt{git merge feature}.
+    
+\end{aufgabe}
+\begin{aufgabe}
+    Make changes to any file in your repository, but do not stage or commit these changes.
+    Use \texttt{git stash} to temporarily store the uncommitted changes.
+    Check the status of your repository with \texttt{git status} to ensure it's clean.
+    Apply the stashed changes back to your working directory with \texttt{git stash pop} and continue your work.
+
+\end{aufgabe}
+
+\section*{Annotations}
 \begin{enumerate}
     \item Link zu einem YouTube-Video: \url{https://www.youtube.com}
 \end{enumerate}
